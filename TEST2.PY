@@ -2,10 +2,10 @@ from os import system,sys
 import random
 ships = [
       {"name":"destroyer","length":2},
-      #{"name":"submarine","length":3},
-      #{"name":"cruiser","length":3},
-      #{"name":"battleship","length":4},
-      #{"name":"carrier","length":5}
+      {"name":"submarine","length":3},
+      {"name":"cruiser","length":3},
+      {"name":"battleship","length":4},
+      {"name":"carrier","length":5}
 ]
 class player:
   playersb=[]
@@ -126,16 +126,26 @@ def display_board(name,shipboard,attackboard):
       print("   "+ "-"*41)
   
 def missile_fire(playerab,playersb):
+ flag= True
+ while flag:
   x,y= input("enter the coordinate of fire").split()
   x=x.upper()
-  x=ord(x)-65
-  y=int(y)-1
-  if playersb[x][y]==0:
-    playerab[x][y]="*"
-  if playersb[x][y]=="O":
-    playerab[x][y]="$"
-    playersb[x][y]="x"
-
+  if int(y)<10 and int(ord(x))<75:
+    flag=False
+    x=ord(x)-65
+    y=int(y)-1
+    if playersb[x][y]==0:
+      playerab[x][y]="*"
+    if playersb[x][y]=="O":
+      playerab[x][y]="$"
+      playersb[x][y]="x"
+      break;
+  if flag:
+    print("enter again")
+    
+ 
+  
+  
 def check_victory(playersb, name):
     victory = True
     for row in playersb:
@@ -178,5 +188,3 @@ def main():
 
 if __name__=="__main__":
   main()
-..
-
