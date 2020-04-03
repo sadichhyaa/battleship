@@ -46,6 +46,9 @@ class player:
               coordinate=(ord(x)-65 + i, int(y)-1)
             if orientation.upper() == "H":
               coordinate=(ord(x)-65, int(y)-1 + i * 1)
+            if orientation.upper()!="V" and orientation.upper()!="H":
+              flag=True
+              break;
             coordinate_list.append(coordinate)
             if coordinate[0]>9 or coordinate[1]>9 or coordinate[0]<0 or coordinate[1]<0:   
               flag=True
@@ -174,13 +177,22 @@ def match(player1,player2):
     ch=sys.stdin.read(1)
 
 def main():
-
-  player1=player("player 1")
-  player1.generate_shifts()
-  ch=sys.stdin.read(1)
-  player2=player("player2")
-  player2.generate_shifts()
-  ch=sys.stdin.read(1)
+  operation=int(input("choose an option 1: takeposition,2: generate_ships "))
+  if operation==1:
+    player1=player("player 1")
+    player1.takeposition()
+    ch=sys.stdin.read(1)
+    player2=player("player2")
+    player2.takeposition()
+    ch=sys.stdin.read(1)
+    
+  if operation==2:
+    player1=player("player 1")
+    player1.generate_shifts()
+    ch=sys.stdin.read(1)
+    player2=player("player2")
+    player2.generate_shifts()
+    ch=sys.stdin.read(1)
   match(player1,player2)
   ch=sys.stdin.read(1)
 
